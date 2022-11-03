@@ -1,0 +1,73 @@
+.main-container {
+  max-width: 900px;
+  height: 350px;
+  margin: 100px auto;
+  padding: 30px 60px;
+  border: 1px solid coral;
+  border-radius: 10px;
+}
+body {
+  background-color: beige;
+}
+
+h1 {
+  text-align: center;
+  font-weight: bolder;
+  color: #6f4785;
+  line-height: 1.5;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+p {
+  text-align: center;
+  font-weight: 200px;
+  color: #6f4785;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.date-time {
+  text-align: left;
+  font-weight: lighter;
+  color: #6f4785;
+  font-size: 24;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.current-day {
+  border: 1px solid coral;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.days {
+  text-align: center;
+  font-weight: 300px;
+  color: #6f4785;
+  font-size: 48;
+  line-height: 1.5;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.current-temp {
+  text-align: center;
+  font-weight: bolder;
+  color: #6f4785;
+  font-size: 24px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.element,
+.day-of-week,
+.weather {
+  text-align: center;
+  font-weight: bolder;
+  color: #6f4785;
+  font-size: 48;
+  line-height: 1.5;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}

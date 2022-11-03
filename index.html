@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather App</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="main-container">
+      <div class="container text-center">
+        <div class="row justify-content-evenly">
+          <div class="col-4 current-day">
+            <div class="date-time">Monday 17 Oct 09:00 <br /></div>
+            <h1>Lagos</h1>
+            <p>Thunderstorm</p>
+            <div class="current-temp">24°C</div>
+            🌩️ <br />
+            <br />
+            <p></p>
+            <br />
+
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter City"
+                aria-label="Enter City"
+                aria-describedby="button-addon2"
+              />
+              <button
+                class="btn btn-outline-secondary button"
+                type="button"
+                id="button-addon2"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+
+          <div class="col-8">
+            <div class="row row-cols-4">
+              <div class="col">
+                <span class="day-of-week">Tuesday <br /></span>
+                <span class="days"> 18 Oct <br /><br /></span>
+                🌧️ <br /><br />
+
+                <span class="days">28°C <br /></span>
+                <span class="weather">RAIN</span>
+                <br /><br /><br />
+              </div>
+              <div class="col">
+                <span class="day-of-week">Wednesday<br /></span>
+                <span class="days"> 19 Oct <br /><br /></span>
+                ☀️ <br /><br />
+
+                <span class="days">24°C <br /></span>
+                <span class="weather">SUNSHINE</span>
+              </div>
+
+              <div class="col">
+                <span class="day-of-week">Thursday<br /></span>
+                <span class="days"> 20 Oct <br /><br /> </span>
+                🌥️ <br /><br />
+
+                <span class="days"> 24°C <br /></span>
+                <span class="weather">CLOUDY</span>
+              </div>
+
+              <div class="col">
+                <span class="day-of-week">Friday<br /></span>
+                <span class="days"> 21 Oct <br /><br /></span>
+                🌩️ <br /><br />
+
+                <span class="days"></span>24°C <br />
+                <span class="weather">THUNDERSTORM</span>
+              </div>
+            </div>
+            <br />
+            <div class="row justify-content-evenly">
+              <div class="col-4 element">Humidity 77%</div>
+              <div class="col-4 element">Wind 16km/h</div>
+              <div class="col-4 element">Precipitation 3%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="src/index.js"></script>
+    </div>
+  </body>
+</html>
