@@ -33,9 +33,10 @@ ul {
     "Lucida Sans", Arial, sans-serif;
 }
 .current-day {
-  border: 1px solid coral;
+  border: 3px solid #906173;
   border-radius: 10px;
   padding: 5px 10px;
+  box-shadow: 10px 5px 5px;
 }
 
 .days {
