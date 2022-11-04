@@ -3,11 +3,13 @@
   height: 350px;
   margin: 100px auto;
   padding: 30px 60px;
-  border: 1px solid coral;
+
   border-radius: 10px;
+  background: beige;
 }
 body {
-  background-color: peachpuff;
+  background: center/100%
+    url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/051/426/original/pexels-james-wheeler-1486974.jpg?1667554960");
 }
 
 h1 {
@@ -18,7 +20,10 @@ h1 {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
-
+ul {
+  list-style: none;
+  text-align: left;
+}
 p {
   text-align: center;
   font-weight: 200px;
@@ -54,9 +59,9 @@ p {
 }
 .current-temp {
   text-align: center;
-  font-weight: bolder;
+  font-weight: 400px;
   color: #6f4785;
-  font-size: 24px;
+  font-size: 36px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
