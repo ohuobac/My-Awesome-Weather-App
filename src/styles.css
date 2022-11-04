@@ -1,9 +1,8 @@
 .main-container {
   max-width: 900px;
-  height: 350px;
+  height: 400px;
   margin: 100px auto;
   padding: 30px 60px;
-
   border-radius: 10px;
   background: beige;
 }
@@ -23,15 +22,6 @@ h1 {
 ul {
   list-style: none;
   text-align: left;
-}
-p {
-  text-align: center;
-  font-weight: 200px;
-  color: #6f4785;
-  font-size: 16px;
-  line-height: 1.5;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
 }
 
 .date-time {
@@ -61,7 +51,7 @@ p {
   text-align: center;
   font-weight: 400px;
   color: #6f4785;
-  font-size: 36px;
+  font-size: 24px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
