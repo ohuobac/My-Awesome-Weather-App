@@ -6,6 +6,7 @@
   border-radius: 10px;
   background: beige;
 }
+
 body {
   background: center/100%
     url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/051/426/original/pexels-james-wheeler-1486974.jpg?1667554960");
@@ -15,13 +16,25 @@ h1 {
   text-align: center;
   font-weight: bolder;
   color: #6f4785;
+  margin-bottom: 0px;
+  margin-top: 0px;
   line-height: 1.5;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+
 ul {
   list-style: none;
   text-align: left;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: #6f4785;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 .date-time {
@@ -32,6 +45,7 @@ ul {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+
 .current-day {
   border: 3px solid #906173;
   border-radius: 10px;
@@ -48,14 +62,7 @@ ul {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
-.current-temp {
-  text-align: center;
-  font-weight: 400px;
-  color: #6f4785;
-  font-size: 24px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-}
+
 .element,
 .day-of-week,
 .weather {
@@ -64,6 +71,26 @@ ul {
   color: #6f4785;
   font-size: 48;
   line-height: 1.5;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.units {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 6px;
+  padding-left: 6px;
+  vertical-align: top;
+  font-weight: normal;
+}
+.current-temp {
+  text-align: center;
+  font-weight: 400px;
+  color: #6f4785;
+  font-size: 36px;
+  margin-top: 0px;
+  padding: 0px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
