@@ -11,6 +11,7 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
   </head>
 
   <body>
@@ -26,28 +27,20 @@
                 <span id="month">Oct</span>
                 <span id="hour">09</span>:<span id="min">00 </span>
               </li>
-              <li>Thunderstorm</li>
+              <li id="description-now">Thunderstorm</li>
             </ul>
-            <div>
-              <span class="current-temp" id="temp">24</span>
-              <span class="units">
-                <a href="#" id="celcius-link">°C</a>|<a
-                  href="#"
-                  id="fahrenheit-link"
-                  >°F</a
-                >
-              </span>
+
+            <div class="current-temp">
+              <span id="temp">24</span><span class="units">°C</span>
             </div>
 
             <img
               src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/051/460/original/17.png?1667575461"
               alt="Thunderstorm-icon"
               width="70"
-              class="current-icon"
             />
-            <br /><br />
-
-            <form class="row g-3" id="current-location-button">
+            <p></p>
+            <form class="row g-3 Location" id="current-location-button">
               <div class="col-8">
                 <button
                   class="btn btn-outline-secondary button"
@@ -86,6 +79,7 @@
               <div class="col">
                 <span class="day-of-week">Tuesday <br /></span>
                 <span class="days"> 18 Oct <br /><br /></span>
+
                 <img
                   src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/051/461/original/7.png?1667577135"
                   alt="rain-icon"
@@ -142,9 +136,19 @@
             </div>
             <br /><br />
             <div class="row justify-content-evenly">
-              <div class="col-4 element">Humidity 77%</div>
-              <div class="col-4 element">Wind 16km/h</div>
-              <div class="col-4 element">Precipitation 3%</div>
+              <div class="col-4 element">
+                <span> Humidity </span>
+                <span id="humidity-now">77</span>%
+              </div>
+              <div class="col-4 element">
+                <span>Wind</span>
+                <span id="windspeed-now">16</span>km/h
+              </div>
+
+              <div class="col-4 element">
+                <span>Visiblity</span>
+                <span id="visibility-now">100</span>m
+              </div>
             </div>
           </div>
         </div>
