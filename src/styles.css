@@ -44,7 +44,7 @@ h1::first-letter {
 
 .date-time {
   text-align: left;
-  font-weight: lighter;
+  font-weight: light;
   font-size: 24;
 }
 
@@ -92,9 +92,26 @@ h1::first-letter {
   font-weight: 700px;
   font-size: 36px;
   margin-top: 0px;
+  margin-bottom: -5px;
   padding: 0px;
 }
 
 .link {
   text-align: right;
 }
+
+.icon-class {
+  line-height: 1px;
+  line-height: 1px;
+  margin-top: -5px;
+  margin-bottom: 0px;
+  padding: 0px;
+}
+
+/**img {
+  line-height: 1px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0px;
+}
+*/

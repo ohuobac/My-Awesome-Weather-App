@@ -74,7 +74,8 @@ function search(event) {
 
       let icon = response.data.condition.icon_url;
       let currentIcon = document.querySelector("#icon");
-      currentIcon.innerHTML = `${icon}`;
+      currentIcon.setAttribute("src", `${icon}`);
+      currentIcon.setAttribute("alt", `${description}`);
 
       let dateElement = document.querySelector("#date");
       dateElement.innerHTML = formatDate(response.data.time * 1000);
@@ -104,7 +105,8 @@ function showTemperature(response) {
   let currentWeatherDescription = document.querySelector("#description-now");
   currentWeatherDescription.innerHTML = `${weatherDescription}`;
   let currentIcon = document.querySelector("#icon");
-  currentIcon.innerHTML = `${icon}`;
+  currentIcon.setAttribute("src", `${icon}`);
+  currentIcon.setAttribute("alt", `${weatherDescription}`);
   let currentHumidity = document.querySelector("#humidity-now");
   currentHumidity.innerHTML = `${humidity}`;
   let currentWindSpeed = document.querySelector("#windspeed-now");
