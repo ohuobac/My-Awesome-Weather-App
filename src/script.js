@@ -1,45 +1,43 @@
-//Getting the user's Date and time
-let now = new Date();
-let date = now.getDate();
-let hours = now.getHours();
-let mins = now.getMinutes();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
-let currentDay = days[now.getDay()];
-let months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-let currentMonth = months[now.getMonth()];
-
-let dayOfWeek = document.querySelector("#week-day");
-dayOfWeek.innerHTML = `${currentDay}`;
-let dayInteger = document.querySelector("#day");
-dayInteger.innerHTML = `${date}`;
-let monthOfYear = document.querySelector("#month");
-monthOfYear.innerHTML = `${currentMonth}`;
-let hourOfDay = document.querySelector("#hour");
-hourOfDay.innerHTML = `${hours}`;
-let minOfHour = document.querySelector("#min");
-minOfHour.innerHTML = `${mins}`;
+//Getting the current Date and time of a searched city
+function formatDate(timestamp) {
+  let now = new Date(timestamp);
+  let date = now.getDate();
+  let hours = now.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let mins = now.getMinutes();
+  if (mins < 10) {
+    mins = `0${mins}`;
+  }
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  let currentDay = days[now.getDay()];
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let currentMonth = months[now.getMonth()];
+  return `${currentDay} ${date} ${currentMonth} ${hours}:${mins}`;
+}
 
 //Function to get the weather forcast of the city entered by the user
 function search(event) {
@@ -47,55 +45,82 @@ function search(event) {
   let citySearch = document.querySelector("#city-input");
   let city = `${citySearch.value}`;
   let h1 = document.querySelector("h1");
-  h1.innerHTML = `${city.toUpperCase()}`;
+  h1.innerHTML = `${city}`;
 
-  let apiKey = "a33b693cfbefd271b0ed075f9a8f65f0";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  function weatherForcast(response) {
-    let description = response.data.weather[0].main;
-    let currentDescription = document.querySelector("#description-now");
-    currentDescription.innerHTML = `${description}`;
+  if (city) {
+    let apiKey = "30375875oe08644bdt39b2fc0a58709a";
+    let apiLink = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(`${apiLink}`).then(weatherForcast);
+    function weatherForcast(response) {
+      let description = response.data.condition.description;
+      let currentDescription = document.querySelector("#description-now");
+      currentDescription.innerHTML = `${description}`;
 
-    let humidity = response.data.main.humidity;
-    let currentHumidity = document.querySelector("#humidity-now");
-    currentHumidity.innerHTML = `${humidity}`;
+      let humidity = response.data.temperature.humidity;
+      let currentHumidity = document.querySelector("#humidity-now");
+      currentHumidity.innerHTML = `${humidity}`;
 
-    let windSpeed = Math.round(response.data.wind.speed);
-    let currentWindSpeed = document.querySelector("#windspeed-now");
-    currentWindSpeed.innerHTML = `${windSpeed}`;
+      let windSpeed = Math.round(response.data.wind.speed);
+      let currentWindSpeed = document.querySelector("#windspeed-now");
+      currentWindSpeed.innerHTML = `${windSpeed}`;
 
-    let temperature = Math.round(response.data.main.temp);
-    let tempNow = document.querySelector("#temp");
-    tempNow.innerHTML = `${temperature}`;
+      let temperature = Math.round(response.data.temperature.current);
+      let tempNow = document.querySelector("#temp");
+      tempNow.innerHTML = `${temperature}`;
 
-    let visibility = response.data.weather[0].id;
-    let currentVisibility = document.querySelector("#visibility-now");
-    currentVisibility.innerHTML = `${visibility}`;
+      let pressure = response.data.temperature.pressure;
+      let currentPressure = document.querySelector("#pressure-now");
+      currentPressure.innerHTML = `${pressure}`;
+
+      let icon = response.data.condition.icon_url;
+      let currentIcon = document.querySelector("#icon");
+      currentIcon.innerHTML = `${icon}`;
+
+      let dateElement = document.querySelector("#date");
+      dateElement.innerHTML = formatDate(response.data.time * 1000);
+    }
+  } else {
+    h1.innerHTML = null;
+    alert("Please Enter a city 😔");
   }
-  axios.get(`${apiUrl}`).then(weatherForcast);
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
 
-//Function to get current location and it's temperature
+//Getting user's current weather forcast
 function showTemperature(response) {
-  let currentCity = response.data.name;
-  let currentTemperature = Math.round(response.data.main.temp);
+  let currentCity = response.data.city;
+  let currentTemperature = Math.round(response.data.temperature.current);
+  let weatherDescription = response.data.condition.description;
+  let windSpeed = Math.round(response.data.wind.speed);
+  let humidity = response.data.temperature.humidity;
+  let icon = response.data.condition.icon_url;
+  let pressure = response.data.temperature.pressure;
+
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${currentCity}`;
   let currentTemp = document.querySelector("#temp");
   currentTemp.innerHTML = `${currentTemperature}`;
+  let currentWeatherDescription = document.querySelector("#description-now");
+  currentWeatherDescription.innerHTML = `${weatherDescription}`;
+  let currentIcon = document.querySelector("#icon");
+  currentIcon.innerHTML = `${icon}`;
+  let currentHumidity = document.querySelector("#humidity-now");
+  currentHumidity.innerHTML = `${humidity}`;
+  let currentWindSpeed = document.querySelector("#windspeed-now");
+  currentWindSpeed.innerHTML = `${windSpeed}`;
+  let currentPressure = document.querySelector("#pressure-now");
+  currentPressure.innerHTML = `${pressure}`;
 }
 
 function showLocation(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  let apiLink = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a33b693cfbefd271b0ed075f9a8f65f0&units=metric`;
-  axios.get(`${apiLink}`).then(showTemperature);
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=30375875oe08644bdt39b2fc0a58709a&units=metric`;
+  axios.get(`${apiUrl}`).then(showTemperature);
 }
 
 function currentLocation(event) {
-  event.preventDefault();
   navigator.geolocation.getCurrentPosition(showLocation);
 }
 
