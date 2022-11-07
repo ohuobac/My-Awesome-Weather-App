@@ -1,15 +1,4 @@
-.main-container {
-  max-width: 900px;
-  height: 420px;
-  margin: 100px auto;
-  padding: 30px 60px;
-  border-radius: 10px;
-  background: #fce6dc;
-}
-
 body {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
   background: center/100%
     url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/051/426/original/pexels-james-wheeler-1486974.jpg?1667554960");
 }
@@ -17,12 +6,9 @@ body {
 h1 {
   text-align: center;
   font-weight: bolder;
-  color: #6f4785;
   margin-bottom: 0px;
   margin-top: 0px;
   line-height: 1.5;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
 }
 
 ul {
@@ -36,19 +22,36 @@ input {
   text-transform: capitalize;
 }
 
+li::first-letter {
+  text-transform: capitalize;
+}
+
+h1::first-letter {
+  text-transform: capitalize;
+}
+
+.main-container {
+  max-width: 900px;
+  height: 420px;
+  margin: 100px auto;
+  padding: 30px 60px;
+  border-radius: 10px;
+  background: #fce6dc;
+  color: #6f4785;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
 .date-time {
   text-align: left;
   font-weight: lighter;
-  color: #6f4785;
   font-size: 24;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
 }
 
 .current-day {
   border: 3px solid #906173;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 0px 20px;
   box-shadow: 10px 5px 5px;
   margin: 0px auto;
 }
@@ -60,11 +63,8 @@ input {
 .days {
   text-align: center;
   font-weight: 300px;
-  color: #6f4785;
   font-size: 48;
   line-height: 1.5;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
 }
 
 .element,
@@ -72,11 +72,8 @@ input {
 .weather {
   text-align: center;
   font-weight: bolder;
-  color: #6f4785;
   font-size: 48;
   line-height: 1.5;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
 }
 
 .units {
@@ -87,21 +84,17 @@ input {
   padding-left: 6px;
   vertical-align: top;
   font-weight: bold;
+  margin-left: -5px;
 }
+
 .current-temp {
   text-align: center;
-  font-weight: 400px;
-  color: #6f4785;
+  font-weight: 700px;
   font-size: 36px;
   margin-top: 0px;
   padding: 0px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
 }
 
 .link {
   text-align: right;
-  color: #6f4785;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
 }
