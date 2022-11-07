@@ -79,6 +79,17 @@ function search(event) {
 
       let dateElement = document.querySelector("#date");
       dateElement.innerHTML = formatDate(response.data.time * 1000);
+
+      function tempConversion(event) {
+        event.preventDefault();
+        let temperature = Math.round(response.data.temperature.current);
+        let conversion = (`${temperature}` * 9) / 5 + 32;
+        let result = Math.round(`${conversion}`);
+        let temperatureElement = document.querySelector("#temp");
+        temperatureElement.innerHTML = `${result}`;
+      }
+      let fahrenheitLink = document.querySelector("#fahrenheit");
+      fahrenheitLink.addEventListener("click", tempConversion);
     }
   } else {
     h1.innerHTML = null;
@@ -113,17 +124,6 @@ function showTemperature(response) {
   currentWindSpeed.innerHTML = `${windSpeed}`;
   let currentPressure = document.querySelector("#pressure-now");
   currentPressure.innerHTML = `${pressure}`;
-
-  function tempConversion(event) {
-    event.preventDefault();
-    let temperature = Math.round(response.data.temperature.current);
-    let conversion = (`${temperature}` * 9) / 5 + 32;
-    let result = Math.round(`${conversion}`);
-    let temperatureElement = document.querySelector("#temp");
-    temperatureElement.innerHTML = `${result}`;
-  }
-  let fahrenheitLink = document.querySelector("#fahrenheit");
-  fahrenheitLink.addEventListener("click", tempConversion);
 }
 
 function showLocation(position) {
