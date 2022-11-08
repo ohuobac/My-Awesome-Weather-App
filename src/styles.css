@@ -31,8 +31,9 @@ h1::first-letter {
 }
 
 .main-container {
+  width: 100%;
   max-width: 900px;
-  height: 420px;
+  height: 450px;
   margin: 100px auto;
   padding: 30px 60px;
   border-radius: 10px;
@@ -42,6 +43,19 @@ h1::first-letter {
     "Lucida Sans", Arial, sans-serif;
 }
 
+.all-forcast {
+  margin-left: -20px;
+  margin-top: -10px;
+  padding-bottom: 50px;
+  width: 100%;
+  margin-right: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .date-time {
   text-align: left;
   font-weight: light;
@@ -49,6 +63,7 @@ h1::first-letter {
 }
 
 .current-day {
+  width: 100%;
   border: 3px solid #906173;
   border-radius: 10px;
   padding: 0px 20px;
@@ -112,11 +127,3 @@ h1::first-letter {
   margin-bottom: 0px;
   padding: 0px;
 }
-
-/**img {
-  line-height: 1px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding: 0px;
-}
-*/

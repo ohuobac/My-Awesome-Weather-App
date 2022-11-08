@@ -194,3 +194,63 @@ let locationButton = document.querySelector("button");
 locationButton.addEventListener("click", currentLocation);
 
 let celciusTemperture = null;
+
+//show date and time of the current location
+function formatDate(timestamp) {
+  let now = new Date(timestamp);
+  let date = now.getDate();
+  let hours = now.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let mins = now.getMinutes();
+  if (mins < 10) {
+    mins = `0${mins}`;
+  }
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  let currentDay = days[now.getDay()];
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let currentMonth = months[now.getMonth()];
+  return `${currentDay} ${date} ${currentMonth} ${hours}:${mins}`;
+}
+
+function showDateTime(response) {
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = formatDate(response.data.time * 1000);
+}
+
+function showLocationTime(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=30375875oe08644bdt39b2fc0a58709a&units=metric`;
+  axios.get(`${apiUrl}`).then(showDateTime);
+}
+
+function currentLocationTime(event) {
+  navigator.geolocation.getCurrentPosition(showLocationTime);
+}
+
+let Button = document.querySelector("button");
+Button.addEventListener("click", currentLocationTime);
