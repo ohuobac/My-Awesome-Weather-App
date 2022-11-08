@@ -32,7 +32,7 @@ h1::first-letter {
 
 .main-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 850px;
   height: 450px;
   margin: 100px auto;
   padding: 30px 60px;
@@ -44,15 +44,12 @@ h1::first-letter {
 }
 
 .all-forcast {
-  margin-left: -20px;
+  margin-left: -12px;
   margin-top: -10px;
-  padding-bottom: 50px;
-  width: 100%;
-  margin-right: auto;
 }
 
 .row {
-  display: flex;
+  display: block;
   flex-wrap: wrap;
 }
 
@@ -81,6 +78,18 @@ h1::first-letter {
   font-size: 48;
   line-height: 1.5;
 }
+
+/*.weather-forcast-temperature-max {
+}
+*/
+
+.weather-forcast-temperature-min {
+  opacity: 0.6;
+}
+
+/*.weather-description {
+}
+*/
 
 .element,
 .day-of-week,

@@ -39,6 +39,12 @@ function formatDate(timestamp) {
   return `${currentDay} ${date} ${currentMonth} ${hours}:${mins}`;
 }
 
+function displayWeatherForcast() {
+  let forcastElement = document.querySelector("#daily-weather-forcast");
+
+  forcastElement.innerHTML = "Forcast";
+}
+
 //Function to get the weather forcast of the city entered by the user
 function search(event) {
   event.preventDefault();
@@ -81,6 +87,7 @@ function search(event) {
       let dateElement = document.querySelector("#date");
       dateElement.innerHTML = formatDate(response.data.time * 1000);
 
+      displayWeatherForcast();
       function fahrenheitConversion(event) {
         event.preventDefault();
 
@@ -254,3 +261,28 @@ function currentLocationTime(event) {
 
 let Button = document.querySelector("button");
 Button.addEventListener("click", currentLocationTime);
+
+/*<div class="row" id="weather-forcast">
+                  <div class="col">
+                    <span class="day-of-week">Tue <br /></span>
+                    <span class="days"> 18 Oct <br /><br /></span><br />
+
+                    <img
+                      src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/051/461/original/7.png?1667577135"
+                      alt="rain-icon"
+                      width="55"
+                    />
+                    <br /><br /><br />
+
+                    <span class="days">
+                      <span class="weather-forcast-temperature-max"> 24° </span>
+
+                      <span class="weather-forcast-temperature-min"> 20° </span>
+                      <br
+                    /></span>
+                    <span class="weather-description">Rain</span>
+                    <br /><br />
+                  </div>
+                </div>
+              </div>
+              */
