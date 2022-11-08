@@ -51,6 +51,7 @@ function search(event) {
     let apiKey = "30375875oe08644bdt39b2fc0a58709a";
     let apiLink = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
     axios.get(`${apiLink}`).then(weatherForcast);
+
     function weatherForcast(response) {
       let description = response.data.condition.description;
       let currentDescription = document.querySelector("#description-now");
@@ -80,16 +81,34 @@ function search(event) {
       let dateElement = document.querySelector("#date");
       dateElement.innerHTML = formatDate(response.data.time * 1000);
 
-      function tempConversion(event) {
+      function fahrenheitConversion(event) {
         event.preventDefault();
-        let temperature = Math.round(response.data.temperature.current);
-        let conversion = (`${temperature}` * 9) / 5 + 32;
+
+        celciusLink.classList.remove("active");
+        fahrenheitLink.classList.add("active");
+
+        celciusTemperture = Math.round(response.data.temperature.current);
+        let conversion = (`${celciusTemperture}` * 9) / 5 + 32;
         let result = Math.round(`${conversion}`);
         let temperatureElement = document.querySelector("#temp");
         temperatureElement.innerHTML = `${result}`;
       }
+
       let fahrenheitLink = document.querySelector("#fahrenheit");
-      fahrenheitLink.addEventListener("click", tempConversion);
+      fahrenheitLink.addEventListener("click", fahrenheitConversion);
+
+      function celciusConversion(event) {
+        event.preventDefault();
+
+        celciusLink.classList.add("active");
+        fahrenheitLink.classList.remove("active");
+
+        let temperatureElement = document.querySelector("#temp");
+        temperatureElement.innerHTML = `${celciusTemperture}`;
+      }
+
+      let celciusLink = document.querySelector("#celcius");
+      celciusLink.addEventListener("click", celciusConversion);
     }
   } else {
     h1.innerHTML = null;
@@ -111,29 +130,53 @@ function showTemperature(response) {
 
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${currentCity}`;
+
   let currentTemp = document.querySelector("#temp");
   currentTemp.innerHTML = `${currentTemperature}`;
+
   let currentWeatherDescription = document.querySelector("#description-now");
   currentWeatherDescription.innerHTML = `${weatherDescription}`;
+
   let currentIcon = document.querySelector("#icon");
   currentIcon.setAttribute("src", `${icon}`);
   currentIcon.setAttribute("alt", `${weatherDescription}`);
+
   let currentHumidity = document.querySelector("#humidity-now");
   currentHumidity.innerHTML = `${humidity}`;
+
   let currentWindSpeed = document.querySelector("#windspeed-now");
   currentWindSpeed.innerHTML = `${windSpeed}`;
+
   let currentPressure = document.querySelector("#pressure-now");
   currentPressure.innerHTML = `${pressure}`;
-  function tempConversion(event) {
+
+  function fahrenheitConversion(event) {
     event.preventDefault();
-    let temperature = Math.round(response.data.temperature.current);
-    let conversion = (`${temperature}` * 9) / 5 + 32;
+    celciusTemperture = Math.round(response.data.temperature.current);
+
+    celciusLink.classList.remove("active");
+    fahrenheitLink.classList.add("active");
+
+    let conversion = (`${celciusTemperture}` * 9) / 5 + 32;
     let result = Math.round(`${conversion}`);
     let temperatureElement = document.querySelector("#temp");
     temperatureElement.innerHTML = `${result}`;
   }
+
   let fahrenheitLink = document.querySelector("#fahrenheit");
-  fahrenheitLink.addEventListener("click", tempConversion);
+  fahrenheitLink.addEventListener("click", fahrenheitConversion);
+
+  function celciusConversion(event) {
+    event.preventDefault();
+    celciusLink.classList.add("active");
+    fahrenheitLink.classList.remove("active");
+
+    let temperatureElement = document.querySelector("#temp");
+    temperatureElement.innerHTML = `${celciusTemperture}`;
+  }
+
+  let celciusLink = document.querySelector("#celcius");
+  celciusLink.addEventListener("click", celciusConversion);
 }
 
 function showLocation(position) {
@@ -149,3 +192,5 @@ function currentLocation(event) {
 
 let locationButton = document.querySelector("button");
 locationButton.addEventListener("click", currentLocation);
+
+let celciusTemperture = null;

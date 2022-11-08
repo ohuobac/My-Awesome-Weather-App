@@ -87,6 +87,11 @@ h1::first-letter {
   margin-left: -5px;
 }
 
+.current-temp .active {
+  cursor: default;
+  color: #6f4785;
+}
+
 .current-temp {
   text-align: center;
   font-weight: 700px;
