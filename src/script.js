@@ -39,8 +39,6 @@ function formatDate(timestamp) {
   return `${currentDay} ${date} ${currentMonth} ${hours}:${mins}`;
 }
 
-//display 5 day weather forcast
-
 //Function to get the weather forcast of the city entered by the user
 function search(event) {
   event.preventDefault();
@@ -82,6 +80,8 @@ function search(event) {
 
       let dateElement = document.querySelector("#date");
       dateElement.innerHTML = formatDate(response.data.time * 1000);
+
+      //Displaying the 5 day weather forcast of a searched city
 
       let apiLinkk = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=30375875oe08644bdt39b2fc0a58709a&units=metric`;
       axios.get(`${apiLinkk}`).then(displayWeatherForcast);
@@ -271,7 +271,102 @@ locationButton.addEventListener("click", currentLocation);
 
 let celciusTemperture = null;
 
-//show date and time of the current location
+//Showing the 5 day weather forcast of the user's current location
+
+function displayCurrentWeatherForcast(response) {
+  function formatDay(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let day = date.getDay();
+    let days = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
+
+    return days[day];
+  }
+
+  function formatDayMonth(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let dateNumber = date.getDate();
+    let month = date.getMonth();
+    let months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    let forcastMonth = months[month];
+    return `${dateNumber} ${forcastMonth}`;
+  }
+  let forcast = response.data.daily;
+  let forcastElement = document.querySelector("#daily-weather-forcast");
+  let forcastHTML = `<div class="row">`;
+  forcast.forEach(function (forcastDay, index) {
+    if (index < 5) {
+      forcastHTML =
+        forcastHTML +
+        `
+                  <div class="col">
+                    <span class="day-of-week">${formatDay(
+                      forcastDay.time
+                    )}<br /></span>
+                    <span class="days">${formatDayMonth(
+                      forcastDay.time
+                    )}  <br /><br /></span><br />
+
+                    <img
+                      src="${forcastDay.condition.icon_url}"
+                      alt="${forcastDay.condition.icon}"
+                      width="55"
+                    />
+                    <br /><br /><br />
+
+                    <span class="days">
+                      <span class="weather-forcast-temperature-max">${Math.round(
+                        forcastDay.temperature.maximum
+                      )}°</span>
+                      <span class="weather-forcast-temperature-min">${Math.round(
+                        forcastDay.temperature.minimum
+                      )}°</span>
+                      <br
+                    /></span>
+                    <span class="weather-description">${
+                      forcastDay.condition.description
+                    }</span>
+                    <br /><br />
+                </div>`;
+    }
+  });
+  forcastHTML = forcastHTML + `</div>`;
+  forcastElement.innerHTML = forcastHTML;
+}
+
+function showDateTime(response) {
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = formatDate(response.data.time * 1000);
+}
+
+function showLocationForcast(position) {
+  let latt = position.coords.latitude;
+  let long = position.coords.longitude;
+  let link = `https://api.shecodes.io/weather/v1/forecast?lon=${long}&lat=${latt}&key=30375875oe08644bdt39b2fc0a58709a&units=metric`;
+  axios.get(`${link}`).then(displayCurrentWeatherForcast);
+}
+
+function currentLocationForcast(event) {
+  navigator.geolocation.getCurrentPosition(showLocationForcast);
+}
+
+let button = document.querySelector("button");
+button.addEventListener("click", currentLocationForcast);
+
+//Showing the date and time of the current location of the user
+
 function formatDate(timestamp) {
   let now = new Date(timestamp);
   let date = now.getDate();
