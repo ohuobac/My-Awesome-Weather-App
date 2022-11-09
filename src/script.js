@@ -39,41 +39,7 @@ function formatDate(timestamp) {
   return `${currentDay} ${date} ${currentMonth} ${hours}:${mins}`;
 }
 
-function displayWeatherForcast() {
-  let forcastElement = document.querySelector("#daily-weather-forcast");
-  let forcastHTML = `<div class="row">`;
-  let days = ["Wed", "Thur", "Fri", "Sat", "Sun"];
-  days.forEach(function (day) {
-    forcastHTML =
-      forcastHTML +
-      `
-                  <div class="col">
-                    <span class="day-of-week">${day}<br /></span>
-                    <span class="days"> 18 Oct <br /><br /></span><br />
-
-                    <img
-                      src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/051/461/original/7.png?1667577135"
-                      alt="rain-icon"
-                      width="55"
-                    />
-                    <br /><br /><br />
-
-                    <span class="days">
-                      <span class="weather-forcast-temperature-max"> 24° </span>
-
-                      <span class="weather-forcast-temperature-min"> 20° </span>
-                      <br
-                    /></span>
-                    <span class="weather-description">Rain</span>
-                    <br /><br />
-                </div>`;
-  });
-
-  forcastHTML = forcastHTML + `</div>`;
-  forcastElement.innerHTML = forcastHTML;
-}
-
-displayWeatherForcast();
+//display 5 day weather forcast
 
 //Function to get the weather forcast of the city entered by the user
 function search(event) {
@@ -117,6 +83,81 @@ function search(event) {
       let dateElement = document.querySelector("#date");
       dateElement.innerHTML = formatDate(response.data.time * 1000);
 
+      let apiLinkk = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=30375875oe08644bdt39b2fc0a58709a&units=metric`;
+      axios.get(`${apiLinkk}`).then(displayWeatherForcast);
+
+      function displayWeatherForcast(response) {
+        function formatDay(timestamp) {
+          let date = new Date(timestamp * 1000);
+          let day = date.getDay();
+          let days = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
+
+          return days[day];
+        }
+
+        function formatDayMonth(timestamp) {
+          let date = new Date(timestamp * 1000);
+          let dateNumber = date.getDate();
+          let month = date.getMonth();
+          let months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ];
+          let forcastMonth = months[month];
+          return `${dateNumber} ${forcastMonth}`;
+        }
+        let forcast = response.data.daily;
+        let forcastElement = document.querySelector("#daily-weather-forcast");
+        let forcastHTML = `<div class="row">`;
+        forcast.forEach(function (forcastDay, index) {
+          if (index < 5) {
+            forcastHTML =
+              forcastHTML +
+              `
+                  <div class="col">
+                    <span class="day-of-week">${formatDay(
+                      forcastDay.time
+                    )}<br /></span>
+                    <span class="days">${formatDayMonth(
+                      forcastDay.time
+                    )}  <br /><br /></span><br />
+
+                    <img
+                      src="${forcastDay.condition.icon_url}"
+                      alt="${forcastDay.condition.icon}"
+                      width="55"
+                    />
+                    <br /><br /><br />
+
+                    <span class="days">
+                      <span class="weather-forcast-temperature-max">${Math.round(
+                        forcastDay.temperature.maximum
+                      )}°</span>
+                      <span class="weather-forcast-temperature-min">${Math.round(
+                        forcastDay.temperature.minimum
+                      )}°</span>
+                      <br
+                    /></span>
+                    <span class="weather-description">${
+                      forcastDay.condition.description
+                    }</span>
+                    <br /><br />
+                </div>`;
+          }
+        });
+        forcastHTML = forcastHTML + `</div>`;
+        forcastElement.innerHTML = forcastHTML;
+      }
       function fahrenheitConversion(event) {
         event.preventDefault();
 
@@ -129,7 +170,6 @@ function search(event) {
         let temperatureElement = document.querySelector("#temp");
         temperatureElement.innerHTML = `${result}`;
       }
-
       let fahrenheitLink = document.querySelector("#fahrenheit");
       fahrenheitLink.addEventListener("click", fahrenheitConversion);
 
