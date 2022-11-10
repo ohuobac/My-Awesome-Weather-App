@@ -194,6 +194,151 @@ function search(event) {
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
 
+//First screen interaction with user
+
+let city = "Lagos";
+let h1 = document.querySelector("h1");
+h1.innerHTML = `${city}`;
+
+let apiKey = "30375875oe08644bdt39b2fc0a58709a";
+let apiLink = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+axios.get(`${apiLink}`).then(weatherForcast);
+
+function weatherForcast(response) {
+  let description = response.data.condition.description;
+  let currentDescription = document.querySelector("#description-now");
+  currentDescription.innerHTML = `${description}`;
+
+  let humidity = response.data.temperature.humidity;
+  let currentHumidity = document.querySelector("#humidity-now");
+  currentHumidity.innerHTML = `${humidity}`;
+
+  let windSpeed = Math.round(response.data.wind.speed);
+  let currentWindSpeed = document.querySelector("#windspeed-now");
+  currentWindSpeed.innerHTML = `${windSpeed}`;
+
+  let temperature = Math.round(response.data.temperature.current);
+  let tempNow = document.querySelector("#temp");
+  tempNow.innerHTML = `${temperature}`;
+
+  let pressure = response.data.temperature.pressure;
+  let currentPressure = document.querySelector("#pressure-now");
+  currentPressure.innerHTML = `${pressure}`;
+
+  let icon = response.data.condition.icon_url;
+  let currentIcon = document.querySelector("#icon");
+  currentIcon.setAttribute("src", `${icon}`);
+  currentIcon.setAttribute("alt", `${description}`);
+
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = formatDate(response.data.time * 1000);
+
+  //Displaying the 5 day weather forcast of a searched city
+
+  let apiLinkk = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=30375875oe08644bdt39b2fc0a58709a&units=metric`;
+  axios.get(`${apiLinkk}`).then(displayWeatherForcast);
+
+  function displayWeatherForcast(response) {
+    function formatDay(timestamp) {
+      let date = new Date(timestamp * 1000);
+      let day = date.getDay();
+      let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+
+      return days[day];
+    }
+
+    function formatDayMonth(timestamp) {
+      let date = new Date(timestamp * 1000);
+      let dateNumber = date.getDate();
+      let month = date.getMonth();
+      let months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      let forcastMonth = months[month];
+      return `${dateNumber} ${forcastMonth}`;
+    }
+    let forcast = response.data.daily;
+    let forcastElement = document.querySelector("#daily-weather-forcast");
+    let forcastHTML = `<div class="row">`;
+    forcast.forEach(function (forcastDay, index) {
+      if (index < 5) {
+        forcastHTML =
+          forcastHTML +
+          `
+                  <div class="col">
+                    <span class="day-of-week">${formatDay(
+                      forcastDay.time
+                    )}<br /></span>
+                    <span class="days">${formatDayMonth(
+                      forcastDay.time
+                    )}  <br /><br /></span><br />
+
+                    <img
+                      src="${forcastDay.condition.icon_url}"
+                      alt="${forcastDay.condition.icon}"
+                      width="55"
+                    />
+                    <br /><br /><br />
+
+                    <span class="days">
+                      <span class="weather-forcast-temperature-max">${Math.round(
+                        forcastDay.temperature.maximum
+                      )}°</span>
+                      <span class="weather-forcast-temperature-min">${Math.round(
+                        forcastDay.temperature.minimum
+                      )}°</span>
+                      <br
+                    /></span>
+                    <span class="weather-description">${
+                      forcastDay.condition.description
+                    }</span>
+                    <br /><br />
+                </div>`;
+      }
+    });
+    forcastHTML = forcastHTML + `</div>`;
+    forcastElement.innerHTML = forcastHTML;
+  }
+  function fahrenheitConversion(event) {
+    event.preventDefault();
+
+    celciusLink.classList.remove("active");
+    fahrenheitLink.classList.add("active");
+
+    celciusTemperture = Math.round(response.data.temperature.current);
+    let conversion = (`${celciusTemperture}` * 9) / 5 + 32;
+    let result = Math.round(`${conversion}`);
+    let temperatureElement = document.querySelector("#temp");
+    temperatureElement.innerHTML = `${result}`;
+  }
+  let fahrenheitLink = document.querySelector("#fahrenheit");
+  fahrenheitLink.addEventListener("click", fahrenheitConversion);
+
+  function celciusConversion(event) {
+    event.preventDefault();
+
+    celciusLink.classList.add("active");
+    fahrenheitLink.classList.remove("active");
+
+    let temperatureElement = document.querySelector("#temp");
+    temperatureElement.innerHTML = `${celciusTemperture}`;
+  }
+
+  let celciusLink = document.querySelector("#celcius");
+  celciusLink.addEventListener("click", celciusConversion);
+}
+
 //Getting user's current weather forcast
 function showTemperature(response) {
   let currentCity = response.data.city;
