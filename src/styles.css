@@ -1,6 +1,7 @@
 body {
   background: center/100%
     url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/051/426/original/pexels-james-wheeler-1486974.jpg?1667554960");
+  opacity: 0.8;
 }
 
 h1 {
